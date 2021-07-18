@@ -32,7 +32,6 @@ public class WallaRobot extends Robot implements MapOrder {
     public Map<String, Integer> getWordsStatistics() throws IOException {
         //access the sites
         for (String site : sitesUrl) {
-
             String siteText;
             siteText = accessSite(site);
             siteText = correctWords(siteText);

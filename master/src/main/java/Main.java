@@ -49,22 +49,19 @@ public class Main {
 
     private static Robot getSiteSelection() {
         Scanner scanner = new Scanner(System.in);
-        int input = 0;
-        while (input < 1 || input > 3) {
+        int option = 0;
+        while (option < 1 || option > 3) {
             System.out.println("choose site do you want to scan?");
             System.out.println("1. Mako");
             System.out.println("2. Ynet");
             System.out.println("3. Walla");
-            input = scanner.nextInt();
+            option = scanner.nextInt();
         }
-        //clear buffer
-        scanner.nextLine();
-        //input must be between 1 to 3 so i can return null in case it isn't
+
         try {
-            switch (input) {
+            switch (option) {
                 case 1:
                     return new MakoRobot();
-
                 case 2:
                     return new YnetRobot();
                 default:
@@ -78,16 +75,19 @@ public class Main {
 
     private static int guessCommonWords(Robot site) {
         Scanner scanner = new Scanner(System.in);
-        String guess;
         int points = 0;
         try {
             String longestArticle = site.getLongestArticleTitle();
             System.out.println("Guess what are the most common words on the site?");
-            System.out.println("hint:\n" + longestArticle);
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("hint: " + longestArticle);
+            System.out.println("----------------------------------------------------------------");
+
+
             Map<String, Integer> wordsInSite = site.getWordsStatistics();
             for (int i = 1; i <= 5; i++) {
                 System.out.println("guess number " + i + ":");
-                guess = scanner.nextLine();
+                String guess = scanner.nextLine();
                 points += wordsInSite.getOrDefault(guess, 0);
             }
         } catch (IOException e) {
